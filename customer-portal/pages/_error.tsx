@@ -1,3 +1,4 @@
+import React from 'react';
 import { NextPageContext } from 'next';
 import { ErrorProps } from 'next/error';
 import Layout from '../components/Layout';
@@ -16,7 +17,7 @@ function Error({ statusCode, hasGetInitialPropsRun, err }: CustomErrorProps) {
       <Layout>
         <div className="min-h-screen flex items-center justify-center bg-secondary-50">
           <div className="text-center">
-            <AlertTriangle className="h-16 w-16 text-error-500 mx-auto mb-4" />
+            <AlertTriangle className="h-16 w-16 text-red-500 mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-secondary-900 mb-2">
               Something went wrong
             </h1>
@@ -46,7 +47,7 @@ function Error({ statusCode, hasGetInitialPropsRun, err }: CustomErrorProps) {
     <Layout>
       <div className="min-h-screen flex items-center justify-center bg-secondary-50">
         <div className="text-center">
-          <AlertTriangle className="h-16 w-16 text-error-500 mx-auto mb-4" />
+          <AlertTriangle className="h-16 w-16 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-secondary-900 mb-2">
             {statusCode
               ? `A ${statusCode} error occurred on server`
@@ -75,21 +76,5 @@ function Error({ statusCode, hasGetInitialPropsRun, err }: CustomErrorProps) {
     </Layout>
   );
 }
-
-Error.getInitialProps = async ({ res, err }: NextPageContext) => {
-  const errorInitialProps = await Error.getInitialProps({ res, err } as any);
-
-  // Workaround for https://github.com/vercel/next.js/issues/8592, mark as
-  // failed so this is not retried.
-  if (res?.statusCode === 404) {
-    return { statusCode: 404 };
-  }
-
-  if (err) {
-    return errorInitialProps;
-  }
-
-  return errorInitialProps;
-};
 
 export default Error;
