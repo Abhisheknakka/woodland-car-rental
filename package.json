@@ -1,0 +1,76 @@
+{
+  "name": "woodland-car-rental-system",
+  "version": "1.0.0",
+  "description": "Complete car rental system with customer portal, admin CRM, and backend API",
+  "private": true,
+  "workspaces": [
+    "customer-portal",
+    "admin-portal",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:customer-portal\" \"npm run dev:admin-portal\" \"npm run dev:backend\"",
+    "dev:customer-portal": "cd customer-portal && npm run dev",
+    "dev:admin-portal": "cd admin-portal && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "build": "npm run build:customer-portal && npm run build:admin-portal && npm run build:backend",
+    "build:customer-portal": "cd customer-portal && npm run build",
+    "build:admin-portal": "cd admin-portal && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "start": "concurrently \"npm run start:customer-portal\" \"npm run start:admin-portal\" \"npm run start:backend\"",
+    "start:customer-portal": "cd customer-portal && npm run start",
+    "start:admin-portal": "cd admin-portal && npm run preview",
+    "start:backend": "cd backend && npm run start",
+    "install:all": "npm install && cd customer-portal && npm install && cd ../admin-portal && npm install && cd ../backend && npm install",
+    "clean": "npm run clean:customer-portal && npm run clean:admin-portal && npm run clean:backend",
+    "clean:customer-portal": "cd customer-portal && rm -rf .next node_modules",
+    "clean:admin-portal": "cd admin-portal && rm -rf dist node_modules",
+    "clean:backend": "cd backend && rm -rf node_modules",
+    "docker:up": "cd infra && docker-compose up -d",
+    "docker:down": "cd infra && docker-compose down",
+    "docker:logs": "cd infra && docker-compose logs -f",
+    "docker:build": "cd infra && docker-compose build",
+    "db:migrate": "cd backend && npm run db:migrate",
+    "db:seed": "cd backend && npm run db:seed",
+    "db:studio": "cd backend && npm run db:studio",
+    "test": "npm run test:customer-portal && npm run test:admin-portal && npm run test:backend",
+    "test:customer-portal": "cd customer-portal && npm run test",
+    "test:admin-portal": "cd admin-portal && npm run test",
+    "test:backend": "cd backend && npm run test",
+    "lint": "npm run lint:customer-portal && npm run lint:admin-portal && npm run lint:backend",
+    "lint:customer-portal": "cd customer-portal && npm run lint",
+    "lint:admin-portal": "cd admin-portal && npm run lint",
+    "lint:backend": "cd backend && npm run lint",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "type-check": "npm run type-check:customer-portal && npm run type-check:admin-portal",
+    "type-check:customer-portal": "cd customer-portal && npm run type-check",
+    "type-check:admin-portal": "cd admin-portal && npm run type-check"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "car-rental",
+    "crm",
+    "booking-system",
+    "nextjs",
+    "express",
+    "postgresql",
+    "docker"
+  ],
+  "author": "Woodland Car Rental Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/woodland-car-rental.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/woodland-car-rental/issues"
+  },
+  "homepage": "https://github.com/your-username/woodland-car-rental#readme"
+}

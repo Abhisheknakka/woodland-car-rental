@@ -1,0 +1,204 @@
+# Woodland Coaching CRM Portal - Cursor Rules
+
+## Project Overview
+This is a monorepo for a coaching business CRM portal with the following structure:
+- `frontend/` - Next.js 14 application with App Router
+- `backend/` - Node.js Express.js API server
+- `infra/` - Docker and infrastructure configurations
+- `docs/` - Project documentation
+
+## Tech Stack
+- **Frontend**: Next.js 14, TypeScript, TailwindCSS, React Hook Form, Zod
+- **Backend**: Node.js, Express.js, Prisma ORM, PostgreSQL, JWT authentication
+- **Infrastructure**: Docker, Docker Compose, Nginx
+- **Payments**: Stripe (primary), Razorpay (alternative)
+
+## File Organization & Naming Conventions
+
+### Frontend (`frontend/`)
+- Use Next.js 14 App Router structure
+- Components in `components/` folder with PascalCase naming
+- Hooks in `hooks/` folder with camelCase naming
+- Types in `types/` folder with PascalCase interfaces/types
+- Utilities in `lib/` folder
+- Follow Next.js best practices for layouts, pages, and components
+
+### Backend (`backend/`)
+- Use Express.js MVC pattern
+- Controllers in `src/controllers/` with camelCase naming
+- Routes in `src/routes/` with camelCase naming
+- Services in `src/services/` for business logic
+- Middleware in `src/middleware/` for authentication, validation, etc.
+- Models defined in Prisma schema (`prisma/schema.prisma`)
+
+### Database
+- Use Prisma ORM for all database operations
+- Define schemas in `prisma/schema.prisma`
+- Run migrations with `npx prisma migrate dev`
+- Generate Prisma client with `npx prisma generate`
+
+## Coding Standards
+
+### TypeScript
+- Use strict TypeScript configuration
+- Define proper interfaces and types for all data structures
+- Avoid `any` type - use proper typing
+- Use union types and generics where appropriate
+
+### React/Next.js
+- Use functional components with hooks
+- Implement proper error boundaries
+- Use Next.js Image component for images
+- Implement proper loading states and error handling
+- Use React Hook Form with Zod validation
+
+### Node.js/Express
+- Use async/await for asynchronous operations
+- Implement proper error handling with try-catch
+- Use middleware for authentication, validation, and logging
+- Follow RESTful API conventions
+- Implement proper HTTP status codes
+
+### Styling
+- Use TailwindCSS utility classes
+- Create reusable component variants
+- Follow mobile-first responsive design
+- Use CSS custom properties for theming
+
+## Authentication & Security
+- Implement JWT-based authentication with refresh tokens
+- Use bcrypt for password hashing
+- Implement rate limiting and CORS policies
+- Use Helmet.js for security headers
+- Validate all user inputs with Zod schemas
+
+## Payment Integration
+- Implement Stripe as primary payment processor
+- Support Razorpay as alternative for Indian market
+- Use webhooks for payment confirmation
+- Implement proper error handling for payment failures
+- Store payment records securely
+
+## API Design
+- Use RESTful conventions for endpoints
+- Implement proper request/response validation
+- Use consistent error response format
+- Implement pagination for list endpoints
+- Use proper HTTP status codes
+
+## Testing
+- Maintain >80% test coverage
+- Write unit tests for services and utilities
+- Write integration tests for API endpoints
+- Use Jest for testing framework
+- Mock external dependencies (Stripe, database)
+
+## Performance & Optimization
+- Implement proper database indexing
+- Use connection pooling for database
+- Implement caching strategies (Redis)
+- Optimize bundle size with code splitting
+- Use Next.js built-in optimizations
+
+## Environment & Configuration
+- Use environment variables for configuration
+- Never commit sensitive data to version control
+- Use `.env.example` files as templates
+- Validate environment variables on startup
+
+## Docker & Deployment
+- Use multi-stage Docker builds
+- Implement health checks for containers
+- Use Docker Compose for local development
+- Separate production and development configurations
+- Implement proper logging and monitoring
+
+## Git Workflow
+- Use conventional commit messages
+- Create feature branches for new development
+- Require pull request reviews
+- Maintain clean git history
+- Use semantic versioning
+
+## Documentation
+- Document all API endpoints
+- Maintain up-to-date README files
+- Document database schema changes
+- Include setup and deployment instructions
+- Document environment variables
+
+## AI Assistance Guidelines
+When working with AI assistance:
+- Always specify the file path when asking for changes
+- Provide context about the specific feature or bug you're working on
+- Ask for specific implementations rather than general guidance
+- Request tests when implementing new features
+- Ask for code reviews and improvements
+
+## Common Patterns
+
+### API Response Format
+```typescript
+interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  message?: string;
+}
+```
+
+### Error Handling
+```typescript
+try {
+  // Operation
+} catch (error) {
+  console.error('Operation failed:', error);
+  throw new Error('User-friendly error message');
+}
+```
+
+### Database Operations
+```typescript
+// Use Prisma for all database operations
+const result = await prisma.model.findMany({
+  where: { /* conditions */ },
+  include: { /* relations */ }
+});
+```
+
+### Component Structure
+```typescript
+interface ComponentProps {
+  // Define props interface
+}
+
+export default function ComponentName({ prop1, prop2 }: ComponentProps) {
+  // Component implementation
+  return (
+    // JSX
+  );
+}
+```
+
+## Dependencies & Versions
+- Keep dependencies up to date
+- Use exact versions in package.json for production
+- Regularly audit for security vulnerabilities
+- Document breaking changes in dependencies
+
+## Monitoring & Logging
+- Implement structured logging
+- Use appropriate log levels (debug, info, warn, error)
+- Monitor application performance
+- Set up error tracking and alerting
+- Monitor database query performance
+
+## Security Best Practices
+- Validate all user inputs
+- Implement proper authentication and authorization
+- Use HTTPS in production
+- Implement rate limiting
+- Regular security audits
+- Keep dependencies updated
+
+Remember: This is a production application handling sensitive user data and payments. Always prioritize security, performance, and maintainability in your code.
